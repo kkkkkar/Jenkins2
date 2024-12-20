@@ -23,21 +23,12 @@ repositories {
 apply plugin: 'java'
 apply plugin: 'edu.sc.seis.launch4j'
 
-fatJar {
-    classifier 'fat'
-    with jar
-    manifest {
-        attributes 'Main-Class': project.mainClassName
-    }
-}
-
-fatJarPrepareFiles.dependsOn jar
-
 launch4j {
     outfile = 'TestMain.exe'
-    mainClassName = Jenkins2.SwingDemo
+    mainClassName = project.mainClassName
     copyConfigurable = []
-    jarTask = project.tasks.fatJar
+    jarTask = project.tasks.shadowJar
+}
 
 // In this section you declare where to find the dependencies of your project
 repositories {
